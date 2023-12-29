@@ -159,7 +159,7 @@ impl Sqlite {
 
     async fn save_raw(tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>, h: &History) -> Result<()> {
         sqlx::query(
-            "insert or ignore into history(id, timestamp, duration, exit, command, cwd, session, hostname, deleted_at)
+            "insert or replace into history(id, timestamp, duration, exit, command, cwd, session, hostname, deleted_at)
                 values(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
         )
         .bind(h.id.0.as_str())
